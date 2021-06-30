@@ -1,15 +1,20 @@
 import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
+import path from "path";
 
 import postRoutes from "./routes/posts.js";
 
-const app = express();
-dotenv.config();
+// const app = express();
+app.use(express.static(path.join(__dirname, "build")));
 const PORT = process.env.PORT || 8080;
-// const PORT = process.env.PORT;
+
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
