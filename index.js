@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 
 import postRoutes from "./routes/posts.js";
-import userRoutes from "./routes/users.js";
+import userRouter from "./routes/users.js";
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 app.use(cors());
 
 app.use("/posts", postRoutes);
-app.use("/user", userRoutes);
+app.use("/user", userRouter);
 
 mongoose
   .connect(process.env.MONGODB_URI, {
