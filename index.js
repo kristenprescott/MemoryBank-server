@@ -8,7 +8,7 @@ import path from "path";
 
 import postRoutes from "./routes/posts.js";
 
-// const app = express();
+const app = express();
 app.use(express.static(path.join(__dirname, "build")));
 const PORT = process.env.PORT || 8080;
 
