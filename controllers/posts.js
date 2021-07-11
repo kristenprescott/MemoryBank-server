@@ -103,7 +103,6 @@ export const deletePost = async (req, res) => {
 };
 
 // LIKE a post
-
 export const likePost = async (req, res) => {
   const { id } = req.params;
 
@@ -127,6 +126,22 @@ export const likePost = async (req, res) => {
     new: true,
   });
   res.status(200).json(updatedPost);
+};
+
+// COMMENT on a post
+export const commentPost = async (req, res) => {
+  const { id } = req.params;
+  const { value } = req.body;
+  // get post from database:
+  const post = await PostMessage.findById(id);
+  // add the comments to that post:
+  post.comments.push(value);
+  // update database so that the post contains the new comment & store the value of the post in updatedPost:
+  const updatedPost = await PostMessage.findByIdAndUpdate(id, post, {
+    new: true,
+  });
+  // return updatedPost:
+  res.json(updatedPost);
 };
 
 export default router;
